@@ -8,35 +8,53 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Dark theme base colors */
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 240 10% 6%;
+    --card-foreground: 0 0% 98%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 240 10% 6%;
+    --popover-foreground: 0 0% 98%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 240 100% 70%;
+    --primary-foreground: 240 10% 3.9%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 100% 70%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+    
+    /* Dynamic color system */
+    --dynamic-primary: 240 100% 70%;
+    --dynamic-primary-muted: 240 100% 85%;
+    --dynamic-primary-dark: 240 100% 45%;
+    
+    /* Gradients */
+    --gradient-radial: radial-gradient(ellipse at center, hsl(var(--dynamic-primary) / 0.15), transparent 70%);
+    --gradient-conic: conic-gradient(from 180deg at 50% 50%, hsl(var(--dynamic-primary) / 0.1), hsl(var(--dynamic-primary) / 0.3), hsl(var(--dynamic-primary) / 0.1));
+    
+    /* Shadows */
+    --shadow-glow: 0 0 40px hsl(var(--dynamic-primary) / 0.15);
+    --shadow-card: 0 8px 32px -8px hsl(0 0% 0% / 0.3);
+    
+    /* Animations */
+    --transition-all: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-color: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
 
     --sidebar-background: 0 0% 98%;
 
