@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
-import { Shuffle, Palette } from 'lucide-react';
+import { Shuffle, Palette, Download } from 'lucide-react';
 import chroma from 'chroma-js';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { ColorPalette } from '@/components/ColorPalette';
+import { CircularColorPicker } from '@/components/CircularColorPicker';
 import { useColorHarmonies } from '@/hooks/useColorHarmonies';
+import { exportPaletteToPDF } from '@/utils/pdfExport';
 import { cn } from '@/lib/utils';
 
 export const ColorHarmonyGenerator = () => {
@@ -72,53 +74,69 @@ export const ColorHarmonyGenerator = () => {
           </p>
         </div>
 
-        {/* Color Input Controls */}
-        <div className="max-w-md mx-auto mb-12 animate-scale-in">
+        {/* Color Picker Controls */}
+        <div className="max-w-2xl mx-auto mb-12 animate-scale-in">
           <div className="bg-card border border-border rounded-lg p-6 shadow-card">
-            <label htmlFor="color-input" className="block text-sm font-medium text-foreground mb-3">
-              Enter HEX Color
-            </label>
-            
-            <div className="flex gap-3">
-              <div className="flex-1 relative">
-                <Input
-                  id="color-input"
-                  type="text"
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+              {/* Circular Color Picker */}
+              <div className="flex justify-center">
+                <CircularColorPicker
                   value={inputColor}
-                  onChange={(e) => handleColorChange(e.target.value)}
-                  placeholder="#6366f1"
-                  className={cn(
-                    "font-mono transition-all duration-200",
-                    !isValidColor && "border-destructive focus:ring-destructive"
-                  )}
-                  aria-describedby={!isValidColor ? "color-error" : undefined}
-                />
-                
-                {/* Color preview */}
-                <div 
-                  className="absolute right-2 top-1/2 -translate-y-1/2 w-6 h-6 rounded border-2 border-white shadow-sm"
-                  style={{ backgroundColor: isValidColor ? inputColor : '#666' }}
-                  aria-hidden="true"
+                  onChange={setInputColor}
+                  size={200}
                 />
               </div>
               
-              <Button
-                onClick={generateRandomColor}
-                variant="dynamic-outline"
-                size="default"
-                className="shrink-0"
-                aria-label="Generate random color"
-              >
-                <Shuffle className="w-4 h-4" />
-                Random
-              </Button>
+              {/* Controls */}
+              <div className="space-y-4">
+                <div>
+                  <label htmlFor="color-input" className="block text-sm font-medium text-foreground mb-3">
+                    HEX Color
+                  </label>
+                  <Input
+                    id="color-input"
+                    type="text"
+                    value={inputColor}
+                    onChange={(e) => handleColorChange(e.target.value)}
+                    placeholder="#6366f1"
+                    className={cn(
+                      "font-mono transition-all duration-200",
+                      !isValidColor && "border-destructive focus:ring-destructive"
+                    )}
+                    aria-describedby={!isValidColor ? "color-error" : undefined}
+                  />
+                  {!isValidColor && (
+                    <p id="color-error" className="text-sm text-destructive mt-2">
+                      Please enter a valid HEX color (e.g., #6366f1)
+                    </p>
+                  )}
+                </div>
+                
+                <div className="flex gap-3">
+                  <Button
+                    onClick={generateRandomColor}
+                    variant="dynamic-outline"
+                    size="default"
+                    className="flex-1"
+                    aria-label="Generate random color"
+                  >
+                    <Shuffle className="w-4 h-4 mr-2" />
+                    Random Color
+                  </Button>
+                  
+                  <Button
+                    onClick={() => exportPaletteToPDF(harmonies, inputColor)}
+                    variant="dynamic"
+                    size="default"
+                    className="flex-1"
+                    aria-label="Export palette as PDF"
+                  >
+                    <Download className="w-4 h-4 mr-2" />
+                    Export PDF
+                  </Button>
+                </div>
+              </div>
             </div>
-            
-            {!isValidColor && (
-              <p id="color-error" className="text-sm text-destructive mt-2">
-                Please enter a valid HEX color (e.g., #6366f1)
-              </p>
-            )}
           </div>
         </div>
 

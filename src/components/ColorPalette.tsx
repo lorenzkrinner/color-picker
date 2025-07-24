@@ -37,7 +37,12 @@ export const ColorPalette = ({ colors, title, description }: ColorPaletteProps) 
         )}
       </div>
       
-      <div className="grid grid-cols-5 gap-2">
+      <div className={`grid gap-2 ${
+        colors.length === 2 ? 'grid-cols-2' : 
+        colors.length === 3 ? 'grid-cols-3' : 
+        colors.length === 4 ? 'grid-cols-4' : 
+        'grid-cols-5'
+      }`}>
         {colors.map((color, index) => (
           <div
             key={index}
