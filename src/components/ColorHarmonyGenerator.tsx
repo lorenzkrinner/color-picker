@@ -74,10 +74,9 @@ export const ColorHarmonyGenerator = () => {
           </p>
         </div>
 
-        {/* Color Picker Controls */}
-        <div className="max-w-2xl mx-auto mb-12 animate-scale-in">
-          <div className="bg-card border border-border rounded-lg p-6 shadow-card">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+        <div className="max-w-4xl mx-auto mb-12 animate-scale-in">
+          <div className="bg-card border border-border rounded-lg p-8 shadow-card">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               {/* Circular Color Picker */}
               <div className="flex justify-center">
                 <CircularColorPicker
@@ -141,7 +140,8 @@ export const ColorHarmonyGenerator = () => {
         </div>
 
         {/* Color Harmonies Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 animate-fade-in">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 animate-fade-in">
           {harmonies.map((harmony, index) => (
             <div
               key={harmony.name}
@@ -155,6 +155,7 @@ export const ColorHarmonyGenerator = () => {
               />
             </div>
           ))}
+          </div>
         </div>
 
         {/* Footer */}

@@ -30,7 +30,7 @@ export const CircularColorPicker = ({ value, onChange, size = 200 }: CircularCol
       const startAngle = (angle * Math.PI) / 180;
       const endAngle = ((angle + 1) * Math.PI) / 180;
 
-      for (let r = 0; r < radius; r += 1) {
+      for (let r = 0; r <= radius; r += 1) {
         const saturation = r / radius;
         const color = chroma.hsl(angle, saturation, 0.7).hex();
         
@@ -48,15 +48,6 @@ export const CircularColorPicker = ({ value, onChange, size = 200 }: CircularCol
     ctx.beginPath();
     ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
     ctx.stroke();
-
-    // Draw inner circle
-    ctx.fillStyle = 'hsl(var(--background))';
-    ctx.beginPath();
-    ctx.arc(centerX, centerY, 15, 0, 2 * Math.PI);
-    ctx.fill();
-    ctx.strokeStyle = 'hsl(var(--border))';
-    ctx.lineWidth = 1;
-    ctx.stroke();
   };
 
   const getColorFromPosition = (x: number, y: number): string => {
@@ -72,7 +63,7 @@ export const CircularColorPicker = ({ value, onChange, size = 200 }: CircularCol
     const mouseY = y - rect.top - centerY;
     
     const distance = Math.sqrt(mouseX * mouseX + mouseY * mouseY);
-    if (distance > radius || distance < 15) return value;
+    if (distance > radius) return value;
 
     const angle = (Math.atan2(mouseY, mouseX) * 180) / Math.PI;
     const normalizedAngle = angle < 0 ? angle + 360 : angle;
